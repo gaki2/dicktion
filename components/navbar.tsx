@@ -3,7 +3,7 @@ export default function NavBar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             DickTion
           </a>
           <button

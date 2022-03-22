@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "../styles/utils.module.css";
 type PropsType = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,14 +8,19 @@ type PropsType = {
 
 export default function WordInput({ onChange, value, onSubmit }: PropsType) {
   const $input = useRef<HTMLInputElement>(null);
-  useLayoutEffect(() => {
+  useEffect(() => {
     if ($input.current) {
       $input.current.focus();
     }
   }, []);
 
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+    >
       <div className={`form-group m-auto ${styles.div_width_50}`}>
         <div className="input-group mb-3">
           <input
