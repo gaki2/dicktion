@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import "bootswatch/dist/flatly/bootstrap.min.css";
 import { useEffect } from "react";
 import Script from "next/script";
+import NavBar from "../components/navbar";
 // __app.tsx 파일은 전체 컴포넌트에 적용되는 Wrapper 라고 생각하면 쉽다.
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossOrigin="anonymous"
       />
+      <NavBar></NavBar>
       <Component {...pageProps} />
     </>
   );

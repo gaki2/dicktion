@@ -5,7 +5,7 @@ type Progress = {
 export default function Progress({ now }: Progress) {
   return (
     <ProgressBar
-      //   className="d-none"
+      className="d-none"
       variant="info"
       now={now}
       label={`${now}%`}

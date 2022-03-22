@@ -4,7 +4,7 @@ export default function NavBar() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            DickTion
           </a>
           <button
             className="navbar-toggler"
@@ -69,16 +69,6 @@ export default function NavBar() {
                 </div>
               </li>
             </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-sm-2"
-                type="text"
-                placeholder="Search"
-              ></input>
-              <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>

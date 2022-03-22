@@ -1,0 +1,24 @@
+.min_height_span {
+  min-height: 4rem; /* span 높이 (h4) 1 rem + margin-top 3 rem = 4.17 rem */
+}
+
+.div_width_50 {
+  width: 50%;
+}
+
+.alert {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: all 1s;
+}
+
+.hidden {
+  left: -1200px;
+}
+
+@media (max-width: 990px) {
+  .div_width_50 {
+    width: 85%;
+  }
+}
