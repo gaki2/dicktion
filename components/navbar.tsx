@@ -1,11 +1,13 @@
+import Link from "next/link";
+
 export default function NavBar() {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            DickTion
-          </a>
+          <Link href="/">
+            <a className="navbar-brand">DickTion</a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -21,10 +23,12 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  Home
-                  <span className="visually-hidden">(current)</span>
-                </a>
+                <Link href="#">
+                  <a className="nav-link active">
+                    Home
+                    <span className="visually-hidden">(current)</span>
+                  </a>
+                </Link>
               </li>
               {/* <li className="nav-item">
                 <a className="nav-link" href="#">

@@ -30,6 +30,7 @@ export default function DataView({ data }: { data: SearchedData | null }) {
         <a
           href={`https://en.dict.naver.com/#/search?range=word&query=${data?.name}`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           {data && "자세히 보러가기"}
         </a>
