@@ -26,7 +26,7 @@ export default function NavBar() {
                   <span className="visually-hidden">(current)</span>
                 </a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="#">
                   Features
                 </a>
@@ -67,7 +67,7 @@ export default function NavBar() {
                     Separated link
                   </a>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

@@ -5,7 +5,7 @@ import Alert from "../components/alert";
 import SearchHistory from "../components/searchHistory";
 import { axiosGetWord } from "../utils/axios";
 import DataView from "../components/dataView";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export type SearchedData = {
   name: string;
@@ -22,6 +22,16 @@ export default function Index() {
   const [searchedData, setSearchedData] = useState<SearchedData | null>(null);
   const [openAlert, setOpenAlert] = useState(false);
   const [searchLog, setSearchLog] = useState<string[]>([]);
+
+  useEffect(() => {
+    let log = [];
+    const localData = localStorage.getItem("searchLog");
+    if (localData) {
+      log = JSON.parse(localData);
+      setSearchLog(log);
+    }
+  }, []);
+
   const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -72,6 +82,7 @@ export default function Index() {
       searchLogUpdate = searchLogUpdate.slice(1);
     }
     setSearchLog(searchLogUpdate);
+    localStorage.setItem("searchLog", JSON.stringify(searchLogUpdate));
   };
 
   const handleAlert = () => {
