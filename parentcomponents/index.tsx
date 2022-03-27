@@ -8,6 +8,7 @@ import DataView from "../components/dataView";
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../utils/axios";
 import { Axios } from "axios";
+import { isMobile } from "../utils/utils";
 
 export type SearchedData = {
   name: string;
@@ -25,12 +26,16 @@ export default function Index() {
   const [openAlert, setOpenAlert] = useState(false);
   const [searchLog, setSearchLog] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isFocus, setIsFocus] = useState(true);
+  const [isFocus, setIsFocus] = useState(isMobile() ? false : true);
   useEffect(() => {
     addInterceptor(axiosInstance);
     // Get data from localStroage and SetData History
     LocalStorage();
   }, []);
+
+  const shouldFocus = () => {
+    return isMobile() ? false : true;
+  };
 
   const addInterceptor = (axiosInstance: Axios) => {
     axiosInstance.interceptors.request.use(
@@ -41,19 +46,19 @@ export default function Index() {
       },
       function (error) {
         setLoading(false);
-        setIsFocus(true);
+        setIsFocus(shouldFocus());
         return Promise.reject(error);
       }
     );
     axiosInstance.interceptors.response.use(
       function (response) {
         setLoading(false);
-        setIsFocus(true);
+        setIsFocus(shouldFocus());
         return response;
       },
       function (error) {
         setLoading(false);
-        setIsFocus(true);
+        setIsFocus(shouldFocus());
         return Promise.reject(error);
       }
     );
