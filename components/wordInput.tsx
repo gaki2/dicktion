@@ -3,16 +3,25 @@ import styles from "../styles/utils.module.css";
 type PropsType = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
+  isFocus: boolean;
   value: string;
 };
 
-export default function WordInput({ onChange, value, onSubmit }: PropsType) {
+export default function WordInput({
+  onChange,
+  value,
+  onSubmit,
+  isFocus,
+}: PropsType) {
   const $input = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    if ($input.current) {
+    if ($input.current && isFocus) {
       $input.current.focus();
+    } else if ($input.current) {
+      $input.current.blur();
     }
-  }, []);
+  }, [isFocus]);
 
   return (
     <form

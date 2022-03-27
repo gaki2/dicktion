@@ -28,7 +28,7 @@ export default function DataView({ data }: { data: SearchedData | null }) {
       </div>
       <h3 className="mt-5">
         <a
-          href={`https://en.dict.naver.com/#/search?range=word&query=${data?.name}`}
+          href={`https://dictionary.cambridge.org/ko/%EC%82%AC%EC%A0%84/%EC%98%81%EC%96%B4/${data?.name}`}
           target="_blank"
           rel="noopener noreferrer"
         >
