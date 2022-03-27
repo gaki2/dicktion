@@ -8,7 +8,6 @@ import DataView from "../components/dataView";
 import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../utils/axios";
 import { Axios } from "axios";
-import { isMobile } from "../utils/utils";
 
 export type SearchedData = {
   name: string;
@@ -20,13 +19,17 @@ export type SearchedData = {
   };
 };
 
-export default function Index() {
+type Props = {
+  isMobile: boolean;
+};
+
+export default function Index({ isMobile }: Props) {
   const [inputValue, setInputValue] = useState("");
   const [searchedData, setSearchedData] = useState<SearchedData | null>(null);
   const [openAlert, setOpenAlert] = useState(false);
   const [searchLog, setSearchLog] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isFocus, setIsFocus] = useState(isMobile() ? false : true);
+  const [isFocus, setIsFocus] = useState(isMobile ? false : true);
   useEffect(() => {
     addInterceptor(axiosInstance);
     // Get data from localStroage and SetData History
@@ -34,7 +37,7 @@ export default function Index() {
   }, []);
 
   const shouldFocus = () => {
-    return isMobile() ? false : true;
+    return isMobile ? false : true;
   };
 
   const addInterceptor = (axiosInstance: Axios) => {
@@ -144,7 +147,9 @@ export default function Index() {
     if (dupIndex !== -1) {
       searchLogUpdate.splice(dupIndex, 1);
     }
-    if (searchLogUpdate.length > 10) {
+    if (!isMobile && searchLogUpdate.length > 10) {
+      searchLogUpdate = searchLogUpdate.slice(1);
+    } else if (isMobile && searchLogUpdate.length > 3) {
       searchLogUpdate = searchLogUpdate.slice(1);
     }
     setSearchLog(searchLogUpdate);

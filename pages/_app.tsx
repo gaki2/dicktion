@@ -1,9 +1,9 @@
+import App, { AppContext, AppInitialProps } from "next/app";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import "bootswatch/dist/flatly/bootstrap.min.css";
-import { useEffect } from "react";
 import Script from "next/script";
 import NavBar from "../components/navbar";
 // __app.tsx 파일은 전체 컴포넌트에 적용되는 Wrapper 라고 생각하면 쉽다.
@@ -24,5 +24,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
+
+  //userAgent
+  const userAgent = (await appContext.ctx.req)
+    ? appContext.ctx.req?.headers["user-agent"]
+    : navigator.userAgent;
+
+  //Mobile
+  const mobile = await userAgent?.indexOf("Mobi");
+
+  //Mobile in pageProps
+  appProps.pageProps.isMobile = (await (mobile !== -1)) ? true : false;
+
+  return { ...appProps };
+};
 
 export default MyApp;

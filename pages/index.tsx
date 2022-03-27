@@ -1,10 +1,14 @@
 import type { NextPage } from "next";
 import Index from "../parentcomponents/index";
 
-const Home: NextPage = () => {
+interface Props {
+  isMobile: boolean;
+}
+
+const Home: NextPage<Props> = ({ isMobile }) => {
   return (
     <>
-      <Index></Index>
+      <Index isMobile={isMobile}></Index>
     </>
   );
 };
