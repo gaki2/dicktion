@@ -47,7 +47,7 @@ export default function Index({ isMobile }: Props) {
     };
   });
 
-  const handleKeydown = (e) => {
+  const handleKeydown = (e: KeyboardEvent) => {
     if (isAlpha(e.key)) {
       setIsFocus(true);
     }
