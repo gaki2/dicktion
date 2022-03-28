@@ -30,7 +30,7 @@ export default function WordInput({
         onSubmit();
       }}
     >
-      <div className={`form-group m-auto ${styles.div_width_50}`}>
+      <div className={`mt-3 form-group m-auto ${styles.div_width_50}`}>
         <div className="input-group mb-3">
           <input
             className="form-control form-control-lg"

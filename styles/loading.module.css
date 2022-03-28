@@ -7,8 +7,6 @@
   width: 100vw;
   min-height: 100vh;
   height: 100vh;
-  height: -webkit-fill-available;
-  height: fill-available;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.18);
 }

@@ -6,3 +6,7 @@ export const isMobile = () => {
     return false;
   }
 };
+
+export function isAlpha(c: string) {
+  return (c >= "a" && c <= "z") || (c >= "A" && c <= "Z");
+}

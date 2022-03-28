@@ -17,6 +17,72 @@
   left: -1200px;
 }
 
+.play {
+  border-radius: 10px;
+  height: 2.5em;
+  width: 5rem;
+  background: transparent;
+  border: 2px solid #016dd9;
+  outline: none;
+  color: #016dd9;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.play:disabled {
+  background-color: #cccccc;
+  border: 2px solid #999999;
+  color: #666666;
+}
+
+.play:hover:enabled {
+  background: #016dd9;
+  color: #ffffff;
+  animation: squeeze3124 0.9s both;
+}
+
+.play:focus {
+  border: 6px solid #6a8bac;
+  animation: squeeze3124 0.9s both;
+}
+
+@keyframes squeeze3124 {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.1, 0.9, 1);
+    transform: scale3d(1.1, 0.9, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.9, 1.1, 1);
+    transform: scale3d(0.9, 1.1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.97, 1.03, 1);
+    transform: scale3d(0.97, 1.03, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.03, 0.97, 1);
+    transform: scale3d(1.03, 0.97, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
 @media (max-width: 990px) {
   .div_width_50 {
     width: 85%;

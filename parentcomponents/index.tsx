@@ -5,13 +5,14 @@ import Alert from "../components/alert";
 import Loading from "../components/loading";
 import SearchHistory from "../components/searchHistory";
 import DataView from "../components/dataView";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { axiosInstance } from "../utils/axios";
+import { isAlpha } from "../utils/utils";
 import { Axios } from "axios";
 
 export type SearchedData = {
   name: string;
-  audio: string;
+  audio: string | null;
   phonetic: string;
   meaning: {
     partOfSpeech: string;
@@ -31,13 +32,25 @@ export default function Index({ isMobile }: Props) {
   const [loading, setLoading] = useState(false);
   const [isFocus, setIsFocus] = useState(isMobile ? false : true);
   useEffect(() => {
+    // get interceptor for axios Loading UI.
     addInterceptor(axiosInstance);
     // Get data from localStroage and SetData History
     LocalStorage();
   }, []);
 
-  const shouldFocus = () => {
-    return isMobile ? false : true;
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeydown);
+
+    // cleanup this component
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  });
+
+  const handleKeydown = (e) => {
+    if (isAlpha(e.key)) {
+      setIsFocus(true);
+    }
   };
 
   const addInterceptor = (axiosInstance: Axios) => {
@@ -49,19 +62,19 @@ export default function Index({ isMobile }: Props) {
       },
       function (error) {
         setLoading(false);
-        setIsFocus(shouldFocus());
+        setIsFocus(false);
         return Promise.reject(error);
       }
     );
     axiosInstance.interceptors.response.use(
       function (response) {
         setLoading(false);
-        setIsFocus(shouldFocus());
+        setIsFocus(false);
         return response;
       },
       function (error) {
         setLoading(false);
-        setIsFocus(shouldFocus());
+        setIsFocus(false);
         return Promise.reject(error);
       }
     );
@@ -130,9 +143,10 @@ export default function Index({ isMobile }: Props) {
         audio = temp.audio;
       }
     }
+
     setSearchedData({
       name: data.word,
-      audio,
+      audio: audio === "" ? null : audio,
       phonetic,
       meaning: {
         partOfSpeech: data.meanings[0].partOfSpeech ?? "",
@@ -175,14 +189,17 @@ export default function Index({ isMobile }: Props) {
     updateSearchLog(name);
   };
 
-  const onClickSearch = async (e: React.MouseEvent<HTMLSpanElement>) => {
-    const word = (e.target as HTMLSpanElement).innerText;
-    setInputValue("");
-    const data = await fetchData(word);
-    const name = data.word;
-    setNewData(data);
-    updateSearchLog(name);
-  };
+  const onClickSearch = useCallback(
+    async (e: React.MouseEvent<HTMLSpanElement>) => {
+      const word = (e.target as HTMLSpanElement).innerText;
+      setInputValue("");
+      const data = await fetchData(word);
+      const name = data.word;
+      setNewData(data);
+      updateSearchLog(name);
+    },
+    [searchLog]
+  );
 
   const onDeleteClick = (name: string) => () => {
     // const updateLog = searchLog.filter((item) => item !== name);

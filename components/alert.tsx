@@ -1,9 +1,10 @@
 import styles from "../styles/utils.module.css";
+import { memo } from "react";
+
 type Props = {
   show: boolean;
 };
-
-export default function Alert({ show }: Props) {
+function Alert({ show }: Props) {
   return (
     <div
       className={`alert alert-dismissible alert-danger ${styles.alert} ${
@@ -19,3 +20,5 @@ export default function Alert({ show }: Props) {
     </div>
   );
 }
+
+export default memo(Alert);

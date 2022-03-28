@@ -1,30 +1,33 @@
 import styles from "../styles/utils.module.css";
+import { memo } from "react";
 
 type Words = {
   words: string[];
   onClickSearch: (e: React.MouseEvent<HTMLSpanElement>) => Promise<void>;
 };
 
-export default function SearchHistory({ words, onClickSearch }: Words) {
+function SearchHistory({ words, onClickSearch }: Words) {
   const wordBadges = [];
   for (let i = 0; i < words.length; i++) {
     wordBadges.push(
       <h4 className="d-inline" key={words[i]}>
-        <span
+        <button
           onClick={onClickSearch}
-          className="badge rounded-pill bg-primary m-1 align-content-center"
+          className="btn badge rounded-pill bg-light m-1 align-content-center"
           role="button"
         >
           {words[i]}
-        </span>
+        </button>
       </h4>
     );
   }
   return (
     <div
-      className={`mt-5 ${styles.div_width_50} m-auto flex-row pt-3 ${styles.min_height_span}`}
+      className={`mt-2 ${styles.div_width_50} m-auto flex-row pt-3 ${styles.min_height_span}`}
     >
       {wordBadges}
     </div>
   );
 }
+
+export default memo(SearchHistory);
